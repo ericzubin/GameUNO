@@ -13,11 +13,13 @@ import java.util.Collections;
  * @author Eric
  */
 public class Baraja {
-             private static ArrayList<Carta> cartas;
-             private static String color[] = {"Azul","Roja","Verde","Amarrilla","COMODIN"};
-             private static String valor[] = {"0","1","2","3","4","5","6","7","8","9","CAMBIO DE SENTIDO"," PIERDE EL TURNO","ROBA DOS","CAMBIO DE COLOR","CAMBIO DE COLOR ROBA CUATRO"};
-       
+               static ArrayList<Carta> cartas;
+               
     public Baraja(int op) {
+        String color[] = {"Azul","Roja","Verde","Amarrilla","COMODIN"};
+        String valor[] = {"0","1","2","3","4","5","6","7","8","9","CAMBIO DE SENTIDO"," PIERDE EL TURNO","ROBA DOS","CAMBIO DE COLOR","CAMBIO DE COLOR ROBA CUATRO"};
+        cartas = new ArrayList<Carta>();
+
         switch(op)
                 {
             case 0:
@@ -56,23 +58,23 @@ public class Baraja {
         cartas.addAll(newCartas);
     }
 
-    public static ArrayList<Carta> getCartas() {
+    public  ArrayList<Carta> getCartas() {
         return cartas;
     }
 
-    public static void setCartas(ArrayList<Carta> cartas) {
-        Baraja.cartas = cartas;
-    }
+   
     
-      public static void verBaraja(ArrayList<Carta> tipoCartas)
+      public String verBaraja()
                {
-                    for (int i = 0; i < tipoCartas.size(); i++) {
-                   	System.out.print(i +"--.");
-			System.out.print(tipoCartas.get(i).getColor());
-                        System.out.print("__");
-                        System.out.println(tipoCartas.get(i).getValor());
+                   String cadena = null;
+                    for (int i = 0; i < cartas.size(); i++) {
+                        cadena+=(i +"--.");
+                        cadena+=(cartas.get(i).getColor());
+                        cadena+=("__");
+                        cadena+=(cartas.get(i).getValor());
 
 		}
+                    return cadena;
                }
        //Nos barajea las cartas
       public static void barajar(){

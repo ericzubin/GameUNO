@@ -28,4 +28,16 @@ public class Juego {
            } 
       return newCartas;
     }
+
+    /**
+     *
+     */
+   public String verMesa()
+   {
+       return Mesa.verBaraja();
+   }
+    public String verCartas()
+   {
+       return Cartas.verBaraja();
+   }
 }

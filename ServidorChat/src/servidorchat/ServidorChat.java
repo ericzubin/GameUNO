@@ -24,7 +24,7 @@ public class ServidorChat {
         Logger log = Logger.getLogger(ServidorChat.class);
         
         int puerto = 1234;
-        int maximoConexiones = 10; // Maximo de conexiones simultaneas
+        int maximoConexiones = 8; // Maximo de conexiones simultaneas
         ServerSocket servidor = null; 
         Socket socket = null;
         MensajesChat mensajes = new MensajesChat();

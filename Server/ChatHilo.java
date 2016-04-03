@@ -3,8 +3,6 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import servidorchat2.Baraja;
-import servidorchat2.Juego;
 
 public class ChatHilo implements Runnable
 {
@@ -12,17 +10,6 @@ public class ChatHilo implements Runnable
 	private static Vector<Socket> sockets;	
 	private Socket socket;
 	private DataInputStream entradaCliente;
-        private Juego Juego;
-        private Baraja tusCartas;
-
-    ChatHilo(Socket socket, Vector<Socket> sockets, Juego Juego, Baraja tusCartas) {
-               this.socket = socket;
-               this.sockets = sockets;  
-               this.Juego=Juego;
-               this.tusCartas=tusCartas;
-    }
-
-  
 
 	private void inicializaEntrada(){
 		try {
@@ -76,7 +63,7 @@ public class ChatHilo implements Runnable
 				DataOutputStream salidaCliente;
 				salidaCliente = new DataOutputStream(
 							socket.getOutputStream());
-				salidaCliente.writeUTF(msg+tusCartas.verBaraja());
+				salidaCliente.writeUTF(msg);
 			}catch (Exception e ){
 				e.printStackTrace();
 			}

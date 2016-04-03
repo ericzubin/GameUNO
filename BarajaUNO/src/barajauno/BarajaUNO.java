@@ -28,7 +28,7 @@ public class BarajaUNO {
 
     public static void main(String[] args) throws IOException {
                cartas = new ArrayList<Carta>();
-             tusCartas = new ArrayList<Carta>();
+               tusCartas = new ArrayList<Carta>();
              mesa = new ArrayList<Carta>();
 InputStreamReader isr = new InputStreamReader(System.in);
 BufferedReader br = new BufferedReader (isr);
