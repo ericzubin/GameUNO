@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servidorchat2;
+package ejemplos.array;
 
 import java.util.ArrayList;
 
@@ -13,14 +13,15 @@ import java.util.ArrayList;
  */
 
 public class Juego {
-        public  Baraja Mesa=new Baraja(0);
-        public  Baraja Cartas=new Baraja(1);
+        public  Baraja Mesa;
+        public  Baraja Cartas;
         public int primeraPartida;
         public ArrayList<Carta> newCartas;
 
-
     public Juego() {
-       System.out.println("Clase Juego" + Cartas.verBaraja());
+        Mesa=new Baraja(0);
+        System.out.println(Mesa.verBaraja());
+        Cartas=new Baraja(1);
     }
 
         

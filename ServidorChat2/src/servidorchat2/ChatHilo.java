@@ -1,5 +1,4 @@
 
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -13,14 +12,14 @@ public class ChatHilo implements Runnable
 	private Socket socket;
 	private DataInputStream entradaCliente;
         private Juego Juego;
-        private Baraja tusCartas;
+	private static ArrayList<Baraja> tusCartas;	
 
-    ChatHilo(Socket socket, Vector<Socket> sockets, Juego Juego, Baraja tusCartas) {
+  
+    ChatHilo(Socket socket, Vector<Socket> sockets, Juego Juego, ArrayList<Baraja> tusCartas) {
                this.socket = socket;
                this.sockets = sockets;  
                this.Juego=Juego;
-               this.tusCartas=tusCartas;
-    }
+               this.tusCartas=tusCartas;    }
 
   
 
@@ -76,7 +75,7 @@ public class ChatHilo implements Runnable
 				DataOutputStream salidaCliente;
 				salidaCliente = new DataOutputStream(
 							socket.getOutputStream());
-				salidaCliente.writeUTF(msg+tusCartas.verBaraja());
+				salidaCliente.writeUTF(msg);
 			}catch (Exception e ){
 				e.printStackTrace();
 			}
@@ -96,7 +95,7 @@ public class ChatHilo implements Runnable
 		String cadena = "m^Server@" + 
 				InetAddress.getLocalHost().getHostAddress()	
 				 + 	"^–^" + usuario + " entro desde " + ip;
-		enviaMensaje(cadena);		 					
+		enviaMensaje(cadena +tusCartas.get(0).verBaraja());		 					
 	}
 
 	public void mensajeSalida(String msg)throws Exception

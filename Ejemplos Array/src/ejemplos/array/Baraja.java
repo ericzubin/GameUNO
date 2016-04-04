@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servidorchat2;
+package ejemplos.array;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +48,6 @@ public class Baraja {
                    }
                }
                barajar();
-               System.out.println("Clase Baraja"+verBaraja());
                 break;
             case 1:
                 break;

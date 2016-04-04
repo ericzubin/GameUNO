@@ -7,25 +7,21 @@ import servidorchat2.Juego;
 public class ServerChat
 {
 	
-	private static Vector<Socket> sockets;
-        private Juego Juego;
-
+	private static Vector<Socket> sockets;   
+    private static ArrayList<Baraja> tusCartas;        
+        private static Juego Juego;
 	public ServerChat(){
 		sockets = new Vector<Socket>();
-                Juego=new Juego();
-                System.out.println(Juego.verMesa());
 
 	}
 
 	public void principal(){
 		ServerSocket sSocket;
 		try {
-			sSocket = new ServerSocket(1093,4);
+			sSocket = new ServerSocket(1100,4);
 			while(true)
 			{
 				Socket socket = sSocket.accept();
-                                Baraja tusCartas;
-                                tusCartas = new Baraja(Juego.primeraPartida());
 				System.out.println(socket);
 				sockets.add(socket);
 				ChatHilo chatHilo = new ChatHilo(socket, sockets,Juego,tusCartas);
@@ -40,6 +36,7 @@ public class ServerChat
 
 	public static void main(String [] args){
 		ServerChat sc = new ServerChat();
+                Juego Juego=Juego=new Juego();
 		sc.principal();
 	}
 }
