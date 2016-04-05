@@ -10,22 +10,13 @@ package servidorchat2;
  * @author Eric
  */
 public class Carta {
-    public String Color;
-    public String Valor;
+    private String Color;
+    private String Valor;
 
     Carta(String color, String valor) {
         Color=color;
         Valor=valor;
     }
-
-    Carta(Carta carta) {
-        
-        this.Color=carta.getColor();
-        this.Valor=carta.getValor();
-    }
-
-   
-
 
     public String getColor() {
         return Color;
