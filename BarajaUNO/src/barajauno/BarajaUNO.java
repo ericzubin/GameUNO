@@ -62,7 +62,7 @@ BufferedReader br = new BufferedReader (isr);
                {
                    if(cartas.size()>0)
                    {
-                    sacar();
+                    //sacar();
                     verUltimaCarta();
                     verBaraja(tusCartas);
                     System.out.println("Escoger una carta detu mano");
@@ -122,7 +122,7 @@ BufferedReader br = new BufferedReader (isr);
        
              if(ComprobarColor(Mano)||ComprobarNumero(Mano))
              {
-              mesa.add(tusCartas.get(Mano));
+             mesa.add(tusCartas.get(Mano));
              tusCartas.remove(Mano);   
              return ;
              }else

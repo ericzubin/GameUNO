@@ -17,7 +17,7 @@ public class Mano {
     Mano(ArrayList<Carta> tusCartas) {
         this.tusCartas =new ArrayList<Carta>();
         this.tusCartas.addAll(tusCartas);
-        System.out.println("Desde la mano: "+tusCartas.size());
+        //System.out.println("Desde la mano: "+tusCartas.size());
     }
 
     public static ArrayList<Carta> getTusCartas() {
@@ -27,8 +27,14 @@ public class Mano {
     public  void setTusCartas(ArrayList<Carta> tusCartas) {
         Mano.tusCartas = tusCartas;
     }
-          
-     
+    public Carta getCartaM(int Mano)
+    {
+        return tusCartas.get(Mano);
+    }
+       public void removerCarta(int Mano)
+    {
+        tusCartas.remove(Mano);
+    }
  public  int sizeCartas() {
 return tusCartas.size();
         }

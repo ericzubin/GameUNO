@@ -8,22 +8,22 @@ public class ChatHilo implements Runnable
 {
 	
 	private static Vector<Socket> sockets;	
-       private static ArrayList<String> usuarios;	
+       private static ArrayList<String> usuarios=new ArrayList<String>();	
 	private Socket socket;
 	private DataInputStream entradaCliente;
   private static ArrayList<Carta> mesa;
       	      private static ArrayList<Carta> cartas;
-
              private static ArrayList<Mano> Mano;
 
 
     ChatHilo(Socket socket, Vector<Socket> sockets, ArrayList<Mano> Mano, ArrayList<Carta> mesa, ArrayList<Carta> cartas) {
-   this.socket=socket;
+            this.socket=socket;
             this.sockets=sockets;
-             this.Mano=Mano;
-             this.mesa=mesa;
+            this.Mano=Mano;
+            this.mesa=mesa;
             this.cartas=cartas;      }
-      
+                      
+
   
 
 	private void inicializaEntrada(){
@@ -35,15 +35,9 @@ public class ChatHilo implements Runnable
 		}
 	}
 
-	public ChatHilo(Socket socket, Vector<Socket> sockets)
-	{
-		this.socket = socket;
-		this.sockets = sockets;
-	}
 
 	//Llamadas CallBack
 	public void run(){
-
 		for(;true;)
 		{
 			inicializaEntrada();
@@ -82,8 +76,6 @@ public class ChatHilo implements Runnable
 				DataOutputStream salidaCliente;
 				salidaCliente = new DataOutputStream(
 							socket.getOutputStream());
-                             System.out.println(msg);
-
                                 StringTokenizer st = 
 					new StringTokenizer(msg, "^");
 		                st.nextToken();
@@ -93,19 +85,100 @@ public class ChatHilo implements Runnable
                                 String usuario =  stui.nextToken();
                                 String ip = stui.nextToken();
                                 st.nextToken();
-		                st.nextToken();
+		                String contenido=st.nextToken();
                                 int Intusuario=usuarios.indexOf(usuario);
-		               String contenido= st.nextToken();
-				salidaCliente.writeUTF(msg);
+                                if(Intusuario==-1)
+                                {
+                                                                    salidaCliente.writeUTF(msg);
+   
+                                }else
+                                {
+                                   int contenidoN=Integer.parseInt(contenido);
+                                   System.out.println("El contenido es: " + contenidoN);
+                                   salidaCliente.writeUTF(msg); 
+                                }
+                          
+                              
+
+                                
+                                   
+                                 
 			}catch (Exception e ){
 				e.printStackTrace();
 			}
 
 		}
 	} 
+          public  void JugarCarta(int Mano,int Jugador){
+       
+             if(ComprobarColor(Mano,Jugador)||ComprobarNumero(Mano,Jugador))
+             {
+              //mesa.add(tusCartas.get(Mano));
+                 mesa.add(ChatHilo.Mano.get(Jugador).getCartaM(Mano));
+                 ChatHilo.Mano.remove(Mano);
+             return ;
+             }else
+             {
+                String mensaje="_____________Error_________";
+                enviaMensaje(mensaje,Jugador);
+                 return ;
+             }
+           
+          
+
+    }
+          public  boolean ComprobarColor(int Mano,int Usuario)
+      { 
+          if(mesa.size()==0)
+          {
+              return true;
+          }
+          if(mesa.get(mesa.size()-1).getColor().equals(ChatHilo.Mano.get(Usuario).getCartaM(Mano).getColor()))
+               {
+                 return true;
+               }
+               else
+                {
+                 return false;
+                }
+      }
+     
+         public  boolean ComprobarNumero(int Mano,int Usuario)
+      { 
+           if(mesa.size()==0)
+          {
+              return true;
+          }
+          if(mesa.get(mesa.size()-1).getValor().equals(ChatHilo.Mano.get(Usuario).getCartaM(Mano).getValor()))
+               {
+                 return true;
+               }
+               else
+                {
+                 return false;
+                }
+      }
+     public  boolean ComprobarColorComodines(int Mano,int Usuario) throws IOException
+     {
+            if(mesa.size()==0)
+          {
+              return true;
+          }
+          
+          if("COMODIN".equals(ChatHilo.Mano.get(Usuario).getCartaM(Mano).getColor()))
+               {
+                  // System.out.println("Escoger el nuevo color \n1.- Azul  \n2.- Roja  \n3.-Verde \n4.-Amarrilla");
+                  return true;
+               }
+               else
+                {
+                 return false;
+                }   
+     }
+        /*
      public static void JugarCarta(int Mano,int Usuario){
        
-             if(ComprobarColor(Mano)||ComprobarNumero(Mano))
+             if(ComprobarColor(Mano,Usuario)||ComprobarNumero(Mano,Usuario))
              {
               mesa.add(tusCartas.get(Mano));
              tusCartas.remove(Mano);   
@@ -115,7 +188,7 @@ public class ChatHilo implements Runnable
                  System.out.println("_____________Error_________");
                  return ;
              }
-     }
+     }*/
            
              public void enviaMensaje(String msg,int Jugador){
 			try{
@@ -141,10 +214,10 @@ public class ChatHilo implements Runnable
 		String cadena = "m^Server@" + 
 				InetAddress.getLocalHost().getHostAddress()	
 				 + 	"^–^" + usuario + " entro desde " + ip;
-                usuarios.add(usuario);
+                this.usuarios.add(usuario);
 		enviaMensaje(cadena);
-                System.out.println("Tamaño de jugadores: "+sockets.size());
-                System.out.println("Tamaño de la mano "+Mano.get(Mano.size()-1).sizeCartas());
+                int Intusuario=usuarios.indexOf(usuario);
+                System.out.println("IdUsuario: "+Intusuario);
                 enviaMensaje(cadena + "TusCartas"+ verBaraja(Mano.get(Mano.size()-1).getTusCartas()),sockets.size()-1);
 	}
                 public void mensajeMesaString (String msg)throws Exception{
